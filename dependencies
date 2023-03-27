@@ -1,0 +1,10 @@
+#doxygen
+extra/texlive-bin
+extra/texlive-core
+extra/texlive-latexextra
+extra/texlive-bibtexextra
+extra/texlive-formatsextra 
+extra/texlive-fontsextra 
+extra/texlive-langcyrillic
+
+graphwiz

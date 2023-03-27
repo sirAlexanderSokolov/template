@@ -1,0 +1,41 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "type": "shell",
+            "command": "cd build;cmake ..; cmake --build . -- -j8; cp ./doxygen/doxyfile ../doxygen/;",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "clear & build & run",
+            "type": "shell",
+            "command": "cd build/; find . -not -name '.gitignore' -delete; cmake ..; cmake --build . -- -j8; chmod +x run.sh; ./run.sh",
+            "problemMatcher": []
+        },
+        {
+            "label": "clear build",
+            "type": "shell",
+            "command": "cd build/; find . -not -name '.gitignore' -delete",
+            "problemMatcher": []
+        },
+        {
+            "label": "clear packages",
+            "type": "shell",
+            "command": "cd packages/; find . -not -name '.gitignore' -delete",
+            "problemMatcher": []
+        },
+        {
+            "label": "doxygen",
+            "type": "shell",
+            "command": "doxygen ./doxygen/doxyfile;cd latex;make -j8;cp refman.pdf ../",
+            "problemMatcher": []
+        },
+    ]
+}

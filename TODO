@@ -1,0 +1,14 @@
+#cmake в readme
+#санитайзеры
+#tmkselect mutex убрать для одного потока
+#hardware_concurency
+#vstune
+#cppcheck
+#fix utest
+#improve tasks
+#test
+#pkg
+
+#std::chrono
+#std::filesystem
+#boost::interprocess(shared mem)
