@@ -7,6 +7,9 @@ int main(int argc, char* argv[]) {
   // print header
   core::diag.print(CMSG001_);
   core::diag.print("=========================");
+#ifdef PR_UNCOMMITED
+  core::diag.print("programm PR_UNCOMMITED: %s", PR_UNCOMMITED);
+#endif
 #ifdef PR_NAME
   core::diag.print("programm name: %s", PR_NAME);
 #endif
