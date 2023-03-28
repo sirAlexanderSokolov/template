@@ -12,11 +12,13 @@ string(TIMESTAMP PROJECT_DATE "%d.%m.%Y")
 
 execute_process(
   COMMAND git status -suno
-  RESULT_VARIABLE STATUS1
-  OUTPUT_VARIABLE COMMIT1 
+  OUTPUT_VARIABLE UNCOMMITED 
   ERROR_QUIET )
-    message(STATUS "STATUS1: ${STATUS1}")
-    message(STATUS "COMMIT1: ${COMMIT1}")
+    message(STATUS "UNCOMMITED: ${UNCOMMITED}")
+    if(UNCOMMITED)
+    message(STATUS "there is uncommited changes")
+    endif()
+    
 
 execute_process(
   COMMAND git rev-parse --short HEAD
