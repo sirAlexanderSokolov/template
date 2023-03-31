@@ -14,10 +14,15 @@ execute_process(
   COMMAND git status -suno
   OUTPUT_VARIABLE UNCOMMITED 
   ERROR_QUIET )
-    message(STATUS "UNCOMMITED: ${UNCOMMITED}")
-    if(UNCOMMITED)
-    message(STATUS "there is uncommited changes")
-    endif()
+  if(UNCOMMITED)
+    # message(FATAL_ERROR "!!!There is uncommited changes!!!")
+    # execute_process(COMMAND git add .)
+    # execute_process(COMMAND git -m "autocommit")
+    # execute_process(COMMAND push)
+    set(UNCOMMITED " [+uncommited changes]")
+  else()
+    set(UNCOMMITED " [commited]")
+  endif()
     
 
 execute_process(
@@ -28,6 +33,8 @@ execute_process(
 if(STATUS AND NOT STATUS EQUAL 0)
     set(COMMIT "NO COMMIT")
     message(STATUS "FAILED TO GET COMMIT: ${STATUS}")
+elseif(COMMIT)
+string(STRIP ${COMMIT} COMMIT)
 endif()
 
 message ("Сборка: ${PROJECT_NAME} Версии ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH} от ${PROJECT_DATE}")
@@ -125,7 +132,7 @@ endif()
 #=====================================================
 # сборка пакета
 if (MAKE_PACKAGE)
-set(CPACK_GENERATOR "DEB;TGZ")
+set(CPACK_GENERATOR "TGZ;TZST;DEB")
 set(CPACK_PACKAGE_CONTACT "shad@shad.ru")
 set(CPACK_PACKAGE_DIRECTORY ${PROJECT_SOURCE_DIR}/packages)
 set(CPACK_PACKAGE_NAME ${PROJECT_NAME})
@@ -134,12 +141,8 @@ set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Project_Hello by Alex for Otus")
 set(CPACK_PACKAGE_VERSION_MAJOR ${PROJECT_VERSION_MAJOR})
 set(CPACK_PACKAGE_VERSION_MINOR ${PROJECT_VERSION_MINOR})
 set(CPACK_PACKAGE_VERSION_PATCH ${PROJECT_VERSION_PATCH})
-# set(CPACK_PACKAGE_INSTALL_DIRECTORY "/opt/mydir/")
-    if (CPACK_GENERATOR MATCHES "DEB")
-    install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION /opt/mylib)
-    elseif (CPACK_GENERATOR MATCHES "DEB")  
-    install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION bin)
-    endif()
+set(CPACK_PACKAGE_INSTALL_DIRECTORY "/opt/mydir/")
+install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION /opt/mylib)
 include(CPack)
 endif()
 #=====================================================

@@ -37,5 +37,17 @@
             "command": "doxygen ./doxygen/doxyfile;cd latex;make -j8;cp refman.pdf ../",
             "problemMatcher": []
         },
+        {
+            "label": "clear & build package",
+            "type": "shell",
+            "command": "cd build/; find . -not -name '.gitignore' -delete; cmake -DMAKE_PACKAGE=ON ..;cmake --build . -- -j8; cpack; cd ../packages/; rm -r _CPack_Packages ; find . -not -name '.gitignore' -not -name '*.deb' -not -name '*.tar.gz' -not -name '*.zst' -delete",
+            "problemMatcher": []
+        },
+        {
+            "label": "build package",
+            "type": "shell",
+            "command": "cd build/; find . -not -name '.gitignore' -delete; cmake -DMAKE_PACKAGE=ON ..;cmake --build . -- -j8; cpack;",
+            "problemMatcher": []
+        },
     ]
 }
