@@ -40,13 +40,31 @@
         {
             "label": "clear & build package",
             "type": "shell",
-            "command": "cd build/; find . -not -name '.gitignore' -delete; cmake -DMAKE_PACKAGE=ON ..;cmake --build . -- -j8; cpack; cd ../packages/; rm -r _CPack_Packages ; find . -not -name '.gitignore' -not -name '*.deb' -not -name '*.tar.gz' -not -name '*.zst' -delete",
+            "command": "cd build/; find . -not -name '.gitignore' -delete; cmake -DMAKE_PACKAGE=ON -DCMAKE_BUILD_TYPE=Release ..;cmake --build . -- -j8; cpack; cd ../packages/; rm -r _CPack_Packages ; find . -not -name '.gitignore' -not -name '*.deb' -not -name '*.tar.gz' -not -name '*.zst' -delete",
             "problemMatcher": []
         },
         {
             "label": "build package",
             "type": "shell",
-            "command": "cd build/; find . -not -name '.gitignore' -delete; cmake -DMAKE_PACKAGE=ON ..;cmake --build . -- -j8; cpack;",
+            "command": "cd build/; find . -not -name '.gitignore' -delete; cmake -DMAKE_PACKAGE=ON ..;cmake --build . -- -j8; cpack -C CPackSourceConfig.cmake;",
+            "problemMatcher": []
+        },
+        {
+            "label": "build test",
+            "type": "shell",
+            "command": "cd build/; find . -not -name '.gitignore' -delete; cmake -DTESTING_GTEST=ON -DCOVERAGE_GTEST=ON ..;cmake --build . -- -j8; ctest --progress; lcov -c -d . -o main_coverage.info; lcov -r main_coverage.info '/usr/include/*' -o filtered_coverage.info; genhtml filtered_coverage.info --output-directory out",
+            "problemMatcher": []
+        },
+        {
+            "label": "build test111",
+            "type": "shell",
+            "command": "cd build/; find . -not -name '.gitignore' -delete; cmake -DTESTING_GTEST=ON -DCOVERAGE_GTEST=ON ..;cmake --build . -- -j8; ctest --progress; lcov -c --exclude '/usr/include/*' -d . -o main_coverage.info; genhtml main_coverage.info --output-directory out",
+            "problemMatcher": []
+        },
+        {
+            "label": "build test222",
+            "type": "shell",
+            "command": "cd build/; find . -not -name '.gitignore' -delete; cmake -DTESTING_GTEST=ON -DCOVERAGE_GTEST=ON ..; cmake --build . -j8 --target cov; lcov -c -d . -o main_coverage.info; genhtml main_coverage.info --output-directory out",
             "problemMatcher": []
         },
     ]

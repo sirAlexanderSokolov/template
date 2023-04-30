@@ -125,14 +125,30 @@ LIB_LOGGER
 #=====================================================
 # модульные гугл-тесты
 if (TESTING_GTEST)
-find_program(GCOVR_EXECUTABLE lcov)
-# add_definitions(-DGTEST)
 add_subdirectory(unit_test)
 endif()
 #=====================================================
+
+
+# Set Package Name
+# set(CPACK_PACKAGE_NAME "example")
+# # Enable Customized Installation Directory With ON
+# set(CPACK_SET_DESTDIR ON)
+# # Set Installation Directory
+# set(CPACK_INSTALL_PREFIX "/home/vesoft/install")
+# # Set The Version Information of The Installation Package
+# set(CPACK_PACKAGE_VERSION "1.0.0")
+# # Set The Group Name
+# set(CPACK_RPM_PACKAGE_GROUP "vesoft")
+# # Set The Vendor Name
+# set(CPACK_PACKAGE_VENDOR "vesoft")
+# # Set The License Information
+# set(CPACK_RPM_PACKAGE_LICENSE "Apache 2.0 + Common Clause 1.0")
+# include(CPack)
+
 # сборка пакета
 if (MAKE_PACKAGE)
-set(CPACK_GENERATOR "TGZ;TZST;DEB")
+set(CPACK_GENERATOR "STGZ")
 set(CPACK_PACKAGE_CONTACT "shad@shad.ru")
 set(CPACK_PACKAGE_DIRECTORY ${PROJECT_SOURCE_DIR}/packages)
 set(CPACK_PACKAGE_NAME ${PROJECT_NAME})
@@ -141,8 +157,10 @@ set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Project_Hello by Alex for Otus")
 set(CPACK_PACKAGE_VERSION_MAJOR ${PROJECT_VERSION_MAJOR})
 set(CPACK_PACKAGE_VERSION_MINOR ${PROJECT_VERSION_MINOR})
 set(CPACK_PACKAGE_VERSION_PATCH ${PROJECT_VERSION_PATCH})
-set(CPACK_PACKAGE_INSTALL_DIRECTORY "/opt/mydir/")
-install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION /opt/mylib)
+set(CPACK_SET_DESTDIR ON)
+set(CPACK_INSTALL_PREFIX "/opt/mydir") #else usr/local
+set(CPACK_PACKAGE_INSTALL_DIRECTORY "/opt/mydir")
+install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION "/opt/mydir")
 include(CPack)
 endif()
 #=====================================================
