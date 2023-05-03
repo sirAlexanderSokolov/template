@@ -68,7 +68,7 @@
         "typeinfo": "cpp",
         "valarray": "cpp",
         "variant": "cpp",
-        "*.in": "cpp",
+        "*.in": "cmake",
         "csignal": "cpp",
         "strstream": "cpp",
         "bitset": "cpp",

@@ -1,28 +1,37 @@
-#include "logger.hpp"
+#include "../../core.hpp"
 
-/* COLOR CODES */
+//---------------------------------------------------------------------------
+logger& logger::instance() {
+  static logger instance;
+  return instance;
+}
+//---------------------------------------------------------------------------
+const void logger::print_head() {
+#ifndef PR_NAME
+#define PR_NAME "template"
+#endif
+#ifndef PR_DESCRIPT
+#define PR_DESCRIPT "project template"
+#endif
+#ifndef PR_VERSION
+#define PR_VERSION "1.0.0"
+#endif
+#ifndef PR_VERSION_DATE
+#define PR_VERSION_DATE __DATE__
+#endif
+#ifndef PROJECT_DEVELOPER
+#define PROJECT_DEVELOPER "Dev"
+#endif
+#ifndef DEV_CONTACT
+#define DEV_CONTACT "example@gmail.com"
+#endif
 
-// Name          | FG | BG
-// -----------------------
-// Black           30  40
-// Red             31  41
-// Green           32  42
-// Yellow          33  43
-// Blue            34  44
-// Magenta         35  45
-// Cyan            36  46
-// White           37  47
-// Bright Black    90  100
-// Bright Red      91  101
-// Bright Green    92  102
-// Bright Yellow   93  103
-// Bright Blue     94  104
-// Bright Magenta  95  105
-// Bright Cyan     96  106
-// Bright White    97  107
-
-/* BOOST FORMAT EXAMPLES */
-// std::cout << boost::format{"%d %d %d"} % 1 % 2 % 3 << std::endl;
-// std::cout << boost::format{"%1% %2% %3%"} % "2018-01-12" % "info" %
-// (boost::format{"%1% was open"} % "test.txt") << std::endl;
-// boost::str((boost::format(fmt) % ... % args));
+  print_message("=========================");
+  print_message("programm name: %s", PR_NAME);
+  print_message("description: %s", PR_DESCRIPT);
+  print_message("version: %s", PR_VERSION);
+  print_message("build date: %s", PR_VERSION_DATE);
+  print_message("developer: %s (%s)", PROJECT_DEVELOPER, DEV_CONTACT);
+  print_message("=========================");
+}
+//---------------------------------------------------------------------------

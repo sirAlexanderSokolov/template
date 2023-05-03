@@ -2,6 +2,6 @@
 #define __ERRORS_H__
 #pragma once
 
-static const char* CERR001_{"Danger! Hello world went wrong!"};
+inline static const char* CERR000_{"Error1. [programm options]: "};
 
-#endif // __ERRORS_H__
+#endif  // __ERRORS_H__
