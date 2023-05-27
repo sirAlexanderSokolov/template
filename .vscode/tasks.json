@@ -6,7 +6,7 @@
         {
             "label": "build",
             "type": "shell",
-            "command": "cd build;cmake ..; cmake --build . -- -j8; cp ./doxygen/doxyfile ../doxygen/;",
+            "command": "if [[ ! -n $(find . -name 'build') ]]; then mkdir -v build; fi; if [[ ! -n $(find . -name 'build') ]]; then echo 'can not create directory'; else cd build/;cmake ..; cmake --build . -- -j8; fi;",
             "problemMatcher": [],
             "group": {
                 "kind": "build",
@@ -16,55 +16,13 @@
         {
             "label": "clear & build & run",
             "type": "shell",
-            "command": "cd build/; find . -not -name '.gitignore' -delete; cmake ..; cmake --build . -- -j8; chmod +x run.sh; ./run.sh",
+            "command": "if [[ ! -n $(find . -name 'build') ]]; then mkdir -v build; fi; if [[ ! -n $(find . -name 'build') ]]; then echo 'can not create directory'; else cd build/; find . -not -name '.gitignore' -delete; cmake ..; cmake --build . -- -j8; chmod +x run.sh; ./run.sh; fi;",
             "problemMatcher": []
         },
         {
             "label": "clear build",
             "type": "shell",
-            "command": "cd build/; find . -not -name '.gitignore' -delete",
-            "problemMatcher": []
-        },
-        {
-            "label": "clear packages",
-            "type": "shell",
-            "command": "cd packages/; find . -not -name '.gitignore' -delete",
-            "problemMatcher": []
-        },
-        {
-            "label": "doxygen",
-            "type": "shell",
-            "command": "doxygen ./doxygen/doxyfile;cd latex;make -j8;cp refman.pdf ../",
-            "problemMatcher": []
-        },
-        {
-            "label": "clear & build package",
-            "type": "shell",
-            "command": "cd build/; find . -not -name '.gitignore' -delete; cmake -DMAKE_PACKAGE=ON -DCMAKE_BUILD_TYPE=Release ..;cmake --build . -- -j8; cpack; cd ../packages/; rm -r _CPack_Packages ; find . -not -name '.gitignore' -not -name '*.deb' -not -name '*.tar.gz' -not -name '*.zst' -delete",
-            "problemMatcher": []
-        },
-        {
-            "label": "build package",
-            "type": "shell",
-            "command": "cd build/; find . -not -name '.gitignore' -delete; cmake -DMAKE_PACKAGE=ON ..;cmake --build . -- -j8; cpack -C CPackSourceConfig.cmake;",
-            "problemMatcher": []
-        },
-        {
-            "label": "build test",
-            "type": "shell",
-            "command": "cd build/; find . -not -name '.gitignore' -delete; cmake -DTESTING_GTEST=ON -DCOVERAGE_GTEST=ON ..;cmake --build . -- -j8; ctest --progress; lcov -c -d . -o main_coverage.info; lcov -r main_coverage.info '/usr/include/*' -o filtered_coverage.info; genhtml filtered_coverage.info --output-directory out",
-            "problemMatcher": []
-        },
-        {
-            "label": "build test111",
-            "type": "shell",
-            "command": "cd build/; find . -not -name '.gitignore' -delete; cmake -DTESTING_GTEST=ON -DCOVERAGE_GTEST=ON ..;cmake --build . -- -j8; ctest --progress; lcov -c --exclude '/usr/include/*' -d . -o main_coverage.info; genhtml main_coverage.info --output-directory out",
-            "problemMatcher": []
-        },
-        {
-            "label": "build test222",
-            "type": "shell",
-            "command": "cd build/; find . -not -name '.gitignore' -delete; cmake -DTESTING_GTEST=ON -DCOVERAGE_GTEST=ON ..; cmake --build . -j8 --target cov; lcov -c -d . -o main_coverage.info; genhtml main_coverage.info --output-directory out",
+            "command": "if [[ ! -n $(find . -name 'build') ]]; then mkdir -v build; fi; if [[ ! -n $(find . -name 'build') ]]; then echo 'can not create directory'; else cd build/; find . -not -name '.gitignore' -delete; fi;",
             "problemMatcher": []
         },
     ]

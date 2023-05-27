@@ -1,7 +1,0 @@
-find_package(Doxygen)
-if (Doxygen_FOUND)
-    message(STATUS "DOXYGEN generated")
-    set(PROJ_NAME ${PROJECT_NAME})
-    configure_file(doxyfile.in doxyfile)
-    add_custom_target(doc COMMAND ${DOXYGEN_EXECUTABLE} ${CMAKE_BINARY_DIR}/Doxyfile)
-endif()

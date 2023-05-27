@@ -1,2 +1,2 @@
 #!/bin/sh
-./@RUN_EXE_NAME@
+./@PROJECT_NAME@

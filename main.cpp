@@ -1,9 +1,6 @@
-#include "core.hpp"
+#include "include/includes.hpp"
 
 int main(int argc, char* argv[]) {
-  print_message("%s", CMSG000_);
-  load_options(argc, argv);
-  // config_programm(o_file_path_cfg);
-  // logic
+  LOG_GREEN("%s", cMSG_000);
   return 0;
 }
